@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+
+:root {
+  --main-color: theme('colors.blue.600');
+  --body-html-color: theme('colors.neutral.950');
+  --secondary-color: theme('colors.neutral.800');
+  --muted-color: theme('colors.neutral.700');
+  --inverted-default-text-color: #000000;
+  --default-text-color: #ffffff;
+  --duration: 250ms;
+}
+
+body,
+html {
+  background-color: var(--body-html-color);
+  color: var(--default-text-color);
+}
+
+button,
+input {
+  appearance: none;
+  outline: none;
+  transition-property: border-color, background-color, box-shadow;
+  transition-duration: var(--duration);
+}
+
+button,
+input[type='submit'] {
+  cursor: pointer;
+}
+
+input {
+  border-radius: 8px;
+  height: 52px;
+  padding: 12px;
+}
+
+form input:not([type='submit']) {
+  border: solid 2px transparent;
+  background-color: white;
+  color: var(--inverted-default-text-color);
+
+  &:focus {
+    border: solid 2px var(--main-color);
+  }
+}
+
+form input[type='submit'] {
+  margin-top: 32px;
+  background-color: var(--main-color);
+  box-shadow: transparent 0 0 0 0;
+  color: white;
+
+  &:hover {
+    box-shadow: var(--main-color) 4px 4px;
+    background-color: var(--muted-color);
+  }
+}

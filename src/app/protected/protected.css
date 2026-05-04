@@ -1,0 +1,41 @@
+@import '../../globals.css';
+
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+  width: 50px;
+  height: 100vh;
+  transition-duration: var(--duration);
+  transition-property: width, padding;
+  background-color: var(--secondary-color);
+  padding: 10px;
+
+  &.open {
+    .menu {
+      align-self: end;
+    }
+    width: 350px;
+  }
+
+  &.closed {
+    .menu {
+      align-self: center;
+    }
+
+    .p {
+      visibility: hidden;
+    }
+  }
+
+  Link:not(.menu) {
+    padding-inline: 32px;
+    padding: 20px;
+    color: var(--default-text-color);
+    border-radius: 8px;
+
+    &:hover {
+      color: var(--inverted-text-color);
+      background-color: var(--default-text-color);
+    }
+  }
+}
