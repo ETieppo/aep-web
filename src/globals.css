@@ -3,9 +3,9 @@
 :root {
   --main-color: theme('colors.blue.600');
   --body-html-color: theme('colors.neutral.950');
-  --secondary-color: theme('colors.neutral.800');
-  --muted-color: theme('colors.neutral.700');
-  --inverted-default-text-color: #000000;
+  --secondary-color: theme('colors.neutral.900');
+  --muted-color: theme('colors.neutral.800');
+  --inverted-text-color: #000000;
   --default-text-color: #ffffff;
   --duration: 250ms;
 }
@@ -17,10 +17,12 @@ html {
 }
 
 button,
-input {
+input,
+.link,
+.nav-bar {
   appearance: none;
   outline: none;
-  transition-property: border-color, background-color, box-shadow;
+  transition-property: border-color, background-color, box-shadow, width, gap;
   transition-duration: var(--duration);
 }
 
@@ -38,7 +40,7 @@ input {
 form input:not([type='submit']) {
   border: solid 2px transparent;
   background-color: white;
-  color: var(--inverted-default-text-color);
+  color: var(--inverted-text-color);
 
   &:focus {
     border: solid 2px var(--main-color);

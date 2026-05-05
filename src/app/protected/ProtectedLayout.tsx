@@ -1,10 +1,9 @@
 import { Outlet } from 'react-router';
 import './protected.css';
-import { useState } from 'react';
+import { useState, type JSX } from 'react';
 import { MdMenu } from 'react-icons/md';
-import { HiHomeModern } from 'react-icons/hi2';
 import { Link } from 'react-router';
-import type { RouteProps } from '../../router';
+import { router, type RouteProps } from '../../router';
 
 export function ProtectedLayout() {
   const [navClass, setNavClass] = useState('closed');
@@ -19,16 +18,26 @@ export function ProtectedLayout() {
         >
           <MdMenu />
         </button>
-        <Link to=''>
-          <HiHomeModern />
-          <label>Home</label>
-        </Link>
+        {router.map((r) => mapRoutes(r, ''))}
       </div>
       <Outlet />
     </div>
   );
 }
 
-function mapRoutes(route:RouteProps){
-return route.children?<Link>:<Link></Link>
+function mapRoutes(route: RouteProps, parentPath: string): JSX.Element {
+  return (
+    <>
+      {!route.hidden && (
+        <Link
+          to={`/${parentPath}/${route.path}`}
+          className='link'
+        >
+          <span>{route.icon}</span>
+          <p>{route.title}</p>
+        </Link>
+      )}
+      {route.children && route.children.map((cr) => mapRoutes(cr, route.path))}
+    </>
+  );
 }

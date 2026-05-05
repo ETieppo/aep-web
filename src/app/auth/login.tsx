@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useState, type ChangeEvent, type SubmitEvent } from 'react';
 import toast from 'react-hot-toast';
 import { api } from '../../core/api';
 import { PiEye, PiEyeClosedThin } from 'react-icons/pi';
@@ -11,8 +11,9 @@ export default function LoginComponent() {
   const [showPass, setShowPass] = useState(false);
   const [credentials, setCredentials] = useState<UserCredentials>({ email: '', password: '' });
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
+    const user_error_message = 'Erro no login, verifique as credenciais!';
 
     fetch(api('/auth/login'), {
       method: 'POST',
@@ -20,12 +21,13 @@ export default function LoginComponent() {
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
     })
-      .then((res) => res.json())
-      .then((res) => {
-        navigate(`/dash/${res}`);
+      .then(async (res) => {
+        const body = await res.json();
+        if (!res.ok) throw await res.json();
+        else return body;
       })
+      .then((res) => navigate(`/app/dash/${res}`))
       .catch((err) => {
-        const user_error_message = 'Erro no login, verifique as credenciais!';
         toast.error(user_error_message);
         console.log(user_error_message, err);
       });
