@@ -3,7 +3,7 @@ import { api } from '../../../core/api';
 import toast from 'react-hot-toast';
 import { TicketComponent, type TicketProps } from '../../../core/components/Ticket.component';
 
-export function AdminDashComponent() {
+export function DashAllTicketsComponent() {
   const [tickets, setTickets] = useState<TicketProps[] | null>(null);
 
   const handleFetchTickets = async () => {

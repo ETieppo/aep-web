@@ -5,13 +5,20 @@
   --body-html-color: theme('colors.neutral.950');
   --secondary-color: theme('colors.neutral.900');
   --muted-color: theme('colors.neutral.800');
+  --semi-muted-color: theme('colors.neutral.700');
   --inverted-text-color: #000000;
   --default-text-color: #ffffff;
   --duration: 250ms;
 }
 
+font-face{
+  family: Quicksand;
+  src: url("/fonts/Quicksand-VariableFont_wght.ttf") format("truetype");
+}
+
 body,
 html {
+  font-family: Quicksand;
   background-color: var(--body-html-color);
   color: var(--default-text-color);
 }
@@ -24,6 +31,7 @@ input,
   outline: none;
   transition-property: border-color, background-color, box-shadow, width, gap;
   transition-duration: var(--duration);
+  border-radius: 8px;
 }
 
 button,
@@ -32,7 +40,6 @@ input[type='submit'] {
 }
 
 input {
-  border-radius: 8px;
   height: 52px;
   padding: 12px;
 }

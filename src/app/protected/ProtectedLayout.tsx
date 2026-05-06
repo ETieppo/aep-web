@@ -3,20 +3,22 @@ import './protected.css';
 import { useState, type JSX } from 'react';
 import { MdMenu } from 'react-icons/md';
 import { Link } from 'react-router';
-import { router, type RouteProps } from '../../router';
+import { joinPath, router, type RouteProps } from '../../router';
+import { FiArrowLeft } from 'react-icons/fi';
 
 export function ProtectedLayout() {
-  const [navClass, setNavClass] = useState('closed');
-  const toggleNavClass = () => setNavClass(navClass == 'open' ? 'closed' : 'open');
+  const [navOpen, setNavOpen] = useState(false);
 
   return (
-    <div className='relative'>
-      <div className={`${navClass} nav-bar`}>
+    <div className='grid grid-cols-2 grid-rows-1 h-screen overflow-hidden text-md'>
+      <div className={`${navOpen ? 'open' : 'closed'} nav-bar`}>
         <button
-          onClick={toggleNavClass}
+          onClick={() => setNavOpen(!navOpen)}
           className='menu'
         >
-          <MdMenu />
+          {navOpen ?
+            <FiArrowLeft />
+          : <MdMenu />}
         </button>
         {router.map((r) => mapRoutes(r, ''))}
       </div>
@@ -25,19 +27,28 @@ export function ProtectedLayout() {
   );
 }
 
-function mapRoutes(route: RouteProps, parentPath: string): JSX.Element {
+function mapRoutes(route: RouteProps, parentPath: string): JSX.Element[] {
+  const actualPath = joinPath(route.path, parentPath);
+  const elements: JSX.Element[] = [];
+  if (!route.hidden && route.icon && route.title) elements.push(renderLink(route, actualPath));
+
+  if (route.children) {
+    const childElements = route.children.flatMap((child) => mapRoutes(child, actualPath));
+    elements.push(...childElements);
+  }
+
+  return elements;
+}
+
+function renderLink(r: RouteProps, path: string): JSX.Element {
   return (
-    <>
-      {!route.hidden && (
-        <Link
-          to={`/${parentPath}/${route.path}`}
-          className='link'
-        >
-          <span>{route.icon}</span>
-          <p>{route.title}</p>
-        </Link>
-      )}
-      {route.children && route.children.map((cr) => mapRoutes(cr, route.path))}
-    </>
+    <Link
+      to={path}
+      className='link'
+      key={path}
+    >
+      <span>{r.icon}</span>
+      <p>{r.title}</p>
+    </Link>
   );
 }
