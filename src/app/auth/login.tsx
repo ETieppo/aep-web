@@ -26,7 +26,9 @@ export default function LoginComponent() {
         if (!res.ok) throw await res.json();
         else return body;
       })
-      .then((res) => navigate(`/app/dash/${res}`))
+      .then((_) => {
+      // navigate(`/app/dash/all`)
+      })
       .catch((err) => {
         toast.error(user_error_message);
         console.log(user_error_message, err);

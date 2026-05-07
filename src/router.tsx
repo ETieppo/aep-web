@@ -23,15 +23,15 @@ export const joinPath = (endpoint: string, parent: string) =>
   endpoint.startsWith('/') ? `${parent}${endpoint}` : `${parent}/${endpoint}`;
 
 export const router: RouteProps[] = [
-  // { path: '/', component: <LoginComponent />, children: undefined, icon: undefined, hidden, title: 'Login' },
+  { path: '/', component: <LoginComponent />, children: undefined, icon: undefined, hidden, title: 'Login' },
   {
-    path: '/app',
+    path: 'app',
     component: <ProtectedLayout />,
     icon: undefined,
     hidden,
     children: [
       {
-        path: '/dash',
+        path: 'dash',
         icon: undefined,
         component: <DashLayout />,
         hidden,
@@ -45,7 +45,7 @@ export const router: RouteProps[] = [
           },
         ],
       },
-      { path: '/tickets', icon: <TiTicket />, component: undefined, title: 'Solicitação', children: [] },
+      { path: 'tickets', icon: <TiTicket />, component: undefined, title: 'Solicitação', children: [] },
     ],
   },
 ];

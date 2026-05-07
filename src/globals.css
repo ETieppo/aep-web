@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 :root {
-  --main-color: theme('colors.blue.600');
+  --main-color: theme('colors.blue.700');
   --body-html-color: theme('colors.neutral.950');
   --secondary-color: theme('colors.neutral.900');
   --muted-color: theme('colors.neutral.800');
@@ -11,9 +11,9 @@
   --duration: 250ms;
 }
 
-font-face{
-  family: Quicksand;
-  src: url("/fonts/Quicksand-VariableFont_wght.ttf") format("truetype");
+@font-face {
+  font-family: Quicksand;
+  src: url('/fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
 }
 
 body,
