@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { api } from '../../core/api';
 import { PiEye, PiEyeClosedThin } from 'react-icons/pi';
 import { useNavigate } from 'react-router';
+import { SpinnerComponent } from '../../core/components/Spinner.component';
 
 type UserCredentials = { email: string; password: string };
 
@@ -10,9 +11,11 @@ export default function LoginComponent() {
   const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
   const [credentials, setCredentials] = useState<UserCredentials>({ email: '', password: '' });
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
+    setLoading(true);
     const user_error_message = 'Erro no login, verifique as credenciais!';
 
     fetch(api('/auth/login'), {
@@ -27,9 +30,11 @@ export default function LoginComponent() {
         else return body;
       })
       .then((_) => {
-      // navigate(`/app/dash/all`)
+        setLoading(false);
+        navigate(`/app/dash/all`);
       })
       .catch((err) => {
+        setLoading(false);
         toast.error(user_error_message);
         console.log(user_error_message, err);
       });
@@ -41,7 +46,8 @@ export default function LoginComponent() {
   };
 
   return (
-    <div className='h-screen w-screen flex flex-row'>
+    <div className='h-screen w-screen flex flex-row relative justify-end'>
+      {loading && <SpinnerComponent />}
       <img
         src='/imgs/chicago3.jpeg'
         alt=''

@@ -30,13 +30,13 @@ function unwrap_router(r: RouteProps, parent_path: string, i: number) {
 
 function App() {
   return (
-    <div>
+    <>
       <Toaster />
 
       <BrowserRouter>
         <Routes>{router.map((r, i) => unwrap_router(r, '', i))}</Routes>
       </BrowserRouter>
-    </div>
+    </>
   );
 }
 

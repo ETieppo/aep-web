@@ -3,8 +3,7 @@ import LoginComponent from './app/auth/login';
 import { ProtectedLayout } from './app/protected/ProtectedLayout';
 import { HiHomeModern } from 'react-icons/hi2';
 import { TiTicket } from 'react-icons/ti';
-import { DashAllTicketsComponent } from './app/protected/dash/DashAllTickets.component';
-import { DashLayout } from './app/protected/dash/DashLayout';
+import { DashComponent } from './app/protected/dash/DashComponent';
 
 export type RouteProps = {
   children: RouteProps[] | undefined;
@@ -32,18 +31,10 @@ export const router: RouteProps[] = [
     children: [
       {
         path: 'dash',
-        icon: undefined,
-        component: <DashLayout />,
-        hidden,
-        children: [
-          {
-            component: <DashAllTicketsComponent />,
-            icon: <HiHomeModern />,
-            children: undefined,
-            path: 'all',
-            title: 'Início',
-          },
-        ],
+        icon: <HiHomeModern />,
+        component: <DashComponent />,
+        title: 'Início',
+        children: undefined,
       },
       { path: 'tickets', icon: <TiTicket />, component: undefined, title: 'Solicitação', children: [] },
     ],

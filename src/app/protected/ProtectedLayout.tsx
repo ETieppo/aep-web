@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router';
-import './protected.css';
 import { useEffect, useState, type JSX } from 'react';
 import { MdMenu } from 'react-icons/md';
 import { Link } from 'react-router';
@@ -10,11 +9,10 @@ import { useLocation } from 'react-router';
 export function ProtectedLayout() {
   const path = useLocation().pathname;
   const [navOpen, setNavOpen] = useState(false);
-
   const handleLinkClick = () => setNavOpen(false);
 
   return (
-    <div className='flex h-screen overflow-hidden text-md'>
+    <div className='flex h-screen overflow-hidden text-md p-[var(--gap)] gap-[var(--gap)]'>
       <div className={`${navOpen ? 'open' : 'closed'} nav-bar`}>
         <button
           onClick={() => setNavOpen(!navOpen)}
@@ -26,8 +24,7 @@ export function ProtectedLayout() {
         </button>
         {router.map((r) => mapRoutes(r, '', handleLinkClick))}
       </div>
-      <div className='flex flex-col'>
-        <h2 className='h-10'></h2>
+      <div className='flex flex-col w-full h-full'>
         <Outlet />
       </div>
     </div>
