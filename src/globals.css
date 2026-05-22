@@ -13,9 +13,15 @@
   --accent-color: white;
   --duration: 250ms;
   --gap: 15px;
+  --padding: 25px;
+  --blur: 8px;
   --rounded: 12px;
-  --title-size: 30px;
+  --label-bottom-reduce: -8px;
+  --title-size: 1.875rem;
+  --subtitle-size: 1.58rem;
+  --line-height: 2.25rem;
   --border-size: 1px;
+  --accent-border-size: 3px;
   --warning: theme('colors.amber.600');
   --error: theme('colors.pink.600');
   --success: theme('colors.emerald.600');
@@ -35,6 +41,8 @@ html {
 
 button,
 input,
+textarea,
+select,
 .link,
 .nav-bar {
   appearance: none;
@@ -44,36 +52,108 @@ input,
   border-radius: var(--rounded);
 }
 
+h1 {
+  font-size: var(--title-size);
+  color: var(--accent-color);
+  line-height: var(--line-height);
+}
+
+h2 {
+  font-size: var(--subtitle-size);
+  color: var(--accent-color);
+}
+
 button,
+select,
 input[type='submit'] {
   cursor: pointer;
 }
 
-input {
+input,
+select {
   height: 52px;
   padding: 12px;
 }
 
-form input:not([type='submit']) {
-  border: solid 2px transparent;
-  background-color: white;
-  color: var(--inverted-text-color);
+textarea {
+  height: 102px;
+  padding: 12px;
+}
 
-  &:focus {
-    border: solid var(--border-size) var(--main-color);
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  width: 380px;
+  box-shadow: -10px 10px 60px black;
+  padding: var(--padding);
+
+  input:not([type='submit']),
+  select,
+  textarea {
+    border: solid jpx transparent;
+    background-color: white;
+    color: var(--inverted-text-color);
+
+    &:focus {
+      border: solid var(--border-size) var(--main-color);
+    }
+
+    &.input-error {
+      border: solid var(--accent-border-size) var(--error);
+    }
+  }
+
+  input[type='submit'] {
+    margin-top: 32px;
+    background-color: var(--main-color);
+    box-shadow: transparent 0 0 0 0;
+    color: var(--accent-color);
+
+    &:hover {
+      box-shadow: var(--main-color) 4px 4px;
+      background-color: var(--muted-color);
+    }
+  }
+
+  label {
+    margin-bottom: var(--label-bottom-reduce);
+  }
+
+  &:not(#login) {
+    border: solid var(--semi-muted-color) var(--border-size);
+    background-color: var(--muted-color);
+    border-radius: var(--rounded);
+  }
+
+  &:is(#login) {
+    backdrop-filter: blur(var(--blur));
+    justify-content: center;
   }
 }
 
-form input[type='submit'] {
-  margin-top: 32px;
-  background-color: var(--main-color);
-  box-shadow: transparent 0 0 0 0;
-  color: var(--accent-color);
+#select-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  justify-items: end;
+  justify-content: end;
 
-  &:hover {
-    box-shadow: var(--main-color) 4px 4px;
-    background-color: var(--muted-color);
+  select {
+    width: 100%;
   }
+
+  #chevron {
+    position: absolute;
+    align-self: center;
+    margin-right: 10px;
+    color: var(--inverted-text-color);
+  }
+}
+
+.default-gap {
+  gap: var(--gap);
 }
 
 .ticket {
@@ -94,11 +174,6 @@ form input[type='submit'] {
     height: 100%;
   }
 
-  h1 {
-    font-size: var(--title-size);
-    color: var(--accent-color);
-  }
-
   #status-bar {
     display: flex;
     flex-direction: row;
@@ -114,6 +189,7 @@ form input[type='submit'] {
   }
 
   #by {
+    font-style: italic;
   }
 
   p#category {
@@ -163,7 +239,6 @@ form input[type='submit'] {
   }
 
   .menu {
-    /* margin-bottom: 5px; */
     padding: 10px;
 
     &:hover {

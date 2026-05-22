@@ -31,7 +31,7 @@ export default function LoginComponent() {
       })
       .then((_) => {
         setLoading(false);
-        navigate(`/app/dash/all`);
+        navigate(`/app/dash`);
       })
       .catch((err) => {
         setLoading(false);
@@ -55,7 +55,8 @@ export default function LoginComponent() {
       />
       <form
         onSubmit={handleSubmit}
-        className='h-screen w-92 p-8 backdrop-blur-xl text-white flex flex-col ml-auto gap-8 justify-center shadow-2xl shadow-black'
+        id="login"
+        className='h-screen  text-white ml-auto '
       >
         <h1 className='font-iter text-2xl w-fit'>LOGIN</h1>
         <div className='flex flex-col'>

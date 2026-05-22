@@ -3,7 +3,7 @@ import type { TicketProps } from './ticket_models';
 export function TicketComponent({ username, category, status, tags, title, description }: TicketProps) {
   return (
     <div className='ticket'>
-      <p id='category'>{category.toString().toUpperCase()}</p>
+      <p id='category'>{category?.toString().toUpperCase()}</p>
 
       <div id='ticket-container'>
         <h1 className=''>{title}</h1>
